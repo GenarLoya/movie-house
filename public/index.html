@@ -27,9 +27,28 @@
             Feel free to seek through the video and it only loads the part you
             want to watch
         </p>
-        <video id="videoPlayer" width="650" controls muted="muted" autoplay>
-            <source src="/hls/out.m3u8" type="application/x-mpegURL" />
-        </video>
+        <video id="videoPlayer" width="650" controls muted autoplay></video>
+
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.0/dist/hls.min.js"></script>
+        <script>
+            const video = document.getElementById("videoPlayer");
+            const videoSrc = "/hls/out.m3u8";
+
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    video.play();
+                });
+            } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+                // Safari
+                video.src = videoSrc;
+                video.addEventListener("loadedmetadata", () => {
+                    video.play();
+                });
+            }
+        </script>
         <i>Big Buck Bunny</i>
     </body>
 </html>

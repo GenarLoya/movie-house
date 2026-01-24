@@ -6,9 +6,9 @@ const app = express();
 const PORT = 3000;
 const cwd = process.cwd();
 
-app.use("hls", express.static(path.join(cwd, ".data", "media")));
+app.use("/hls", express.static(path.join(cwd, ".data", "media")));
 
-app.get("/,video-web", (_req, res) => {
+app.get("/video-web", (_req, res) => {
   res.sendFile(path.join(cwd, "public", "index.html"));
 });
 
