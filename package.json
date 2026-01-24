@@ -6,26 +6,24 @@
   "type": "module",
   "scripts": {
     "build": "tsup",
-    "start:downloader": "node dist/downloader/index.ts",
-    "start:media": "node dist/index.js",
-    "dev:downloader": "tsx --watch src/downloader/index.ts",
-    "dev:media": "tsx --watch src/index.ts"
+    "start": "node dist/index.js",
+    "dev": "tsx --watch src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node-media-server": "^2.3.7",
-    "@types/webtorrent": "^0.110.1",
+    "@biomejs/biome": "^2.3.12",
+    "@types/express": "^5.0.6",
     "tslib": "^2.8.1",
     "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
+    "express": "^5.2.1",
     "node-media-server": "^4.2.4",
-    "tsx": "^4.21.0",
-    "webtorrent": "^2.8.5",
     "zod": "^4.3.6"
   }
 }
