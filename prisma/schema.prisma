@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -11,4 +5,109 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+enum MediaType {
+  MOVIE
+  EPISODE
+}
+
+enum MediaStatus {
+  UPLOADED
+  PROCESSING
+  READY
+  FAILED
+}
+
+enum VideoContainer {
+  MP4
+  MKV
+  AVI
+}
+
+enum HlsStatus {
+  PENDING
+  PROCESSING
+  READY
+  FAILED
+}
+
+model MediaFile {
+  id     String      @id @default(cuid())
+  type   MediaType
+  status MediaStatus @default(UPLOADED)
+
+  originalPath String
+  container    VideoContainer
+  sizeBytes    BigInt
+  durationSec  Int?
+
+  hlsPath   String?
+  hlsStatus HlsStatus @default(PENDING)
+
+  movie   Movie?
+  episode Episode?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([status])
+}
+
+model Movie {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  releaseYear Int?
+
+  mediaFileId String    @unique
+  mediaFile   MediaFile @relation(fields: [mediaFileId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Series {
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+
+  seasons Season[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Season {
+  id     String @id @default(cuid())
+  number Int
+
+  seriesId String
+  series   Series @relation(fields: [seriesId], references: [id])
+
+  episodes Episode[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([seriesId, number])
+}
+
+model Episode {
+  id          String  @id @default(cuid())
+  title       String
+  number      Int
+  description String?
+
+  seasonId String
+  season   Season @relation(fields: [seasonId], references: [id])
+
+  mediaFileId String    @unique
+  mediaFile   MediaFile @relation(fields: [mediaFileId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([seasonId, number])
 }
