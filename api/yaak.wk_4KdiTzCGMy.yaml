@@ -1,0 +1,15 @@
+type: workspace
+model: workspace
+id: wk_4KdiTzCGMy
+createdAt: 2026-01-30T05:57:35.466253758
+updatedAt: 2026-01-30T05:57:35.466255584
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: movie-home-api
+encryptionKeyChallenge: null
+settingValidateCertificates: true
+settingFollowRedirects: true
+settingRequestTimeout: 0
+settingDnsOverrides: []
