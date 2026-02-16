@@ -1,18 +1,5 @@
-import express from "express";
-import { prisma } from "./db/prisma";
-import { ENV } from "./env";
-import { logger } from "./utils/logger";
+import { createServer } from "express-zod-api";
+import { apiConfig } from "./config";
+import { routing } from "./routing";
 
-const app = express();
-
-app.use(express.json());
-
-app.get("/", async (_req, res) => {
-  const data = await prisma.movie.findMany();
-
-  return res.json(data);
-});
-
-app.listen(ENV.APP_PORT, () => {
-  logger.info({ port: ENV.APP_PORT, url: ENV.APP_URL }, "Server started");
-});
+createServer(apiConfig, routing);
