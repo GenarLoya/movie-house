@@ -1,0 +1,13 @@
+type: folder
+model: folder
+id: fl_aDrAkJWJPQ
+createdAt: 2026-02-16T02:20:15.985696912
+updatedAt: 2026-02-16T02:20:15.985698818
+workspaceId: wk_4KdiTzCGMy
+folderId: null
+authentication: {}
+authenticationType: null
+description: Media upload and processing endpoints
+headers: []
+name: Media
+sortPriority: 0.0

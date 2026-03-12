@@ -1,0 +1,27 @@
+type: http_request
+model: http_request
+id: rq_KyJmYa6ZC5
+createdAt: 2026-02-16T02:20:22.503533015
+updatedAt: 2026-02-16T02:21:15.429708756
+workspaceId: wk_4KdiTzCGMy
+folderId: fl_aDrAkJWJPQ
+authentication: {}
+authenticationType: null
+body:
+  form:
+  - enabled: true
+    file: /home/genarold/g0Dots/profile.png
+    id: mmXmbIHe9U
+    name: video
+  - enabled: true
+    id: 5yKtHgb2vP
+    name: ''
+    value: ''
+bodyType: multipart/form-data
+description: Upload media file (movie or episode) for HLS processing
+headers: []
+method: POST
+name: Upload Media
+sortPriority: 0.0
+url: http://localhost:3000/v1/media/upload
+urlParameters: []
